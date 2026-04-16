@@ -31,12 +31,16 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         style={{
-          position: "sticky",
+          position: "fixed",
           top: 0,
-          zIndex: 100,
+          left: 0,
+          width: "100%",
+          zIndex: 1000,
+
           background: "rgba(0,0,0,0.95)",
           backdropFilter: "blur(6px)",
           padding: scrolled ? "10px 20px" : "18px 20px",
+          transition: "all 0.3s ease",
         }}
       >
         <div
