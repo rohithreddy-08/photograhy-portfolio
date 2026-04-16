@@ -36,20 +36,22 @@ export default function Contact() {
         : `${values.dateRange?.[0]?.format("DD-MM-YYYY")} to ${values.dateRange?.[1]?.format("DD-MM-YYYY")}`;
 
     const messageText =
-      "Namaste,\n\n" +
-      "A new inquiry has been submitted for Sai Krishna Machini.\n\n" +
-      `Client Details:\n` +
-      `${values.name} (${values.phone})\n\n` +
-      `Shoot Type: ${
-        values.shootType === "single" ? "Single Day" : "Multiple Days"
-      }\n` +
-      `Event Date: ${dateText}\n` +
-      (values.shootType === "single"
-        ? `Preferred Time: ${values.slot}\n`
-        : "") +
+      "Hey!\n\n" +
+      "Sai Krishna Machini\n" +
+      "New Booking Inquiry\n\n" +
+      values.name +
+      " (" +
+      values.phone +
+      ")\n\n" +
+      "Shoot Type: " +
+      (values.shootType === "single" ? "Single Day" : "Multiple Days") +
       "\n" +
-      `Message:\n${values.message || "N/A"}\n\n` +
-      "Submitted via website.";
+      "Date: " +
+      dateText +
+      "\n" +
+      (values.shootType === "single" ? "Slot: " + values.slot + "\n" : "") +
+      "Message: " +
+      (values.message || "N/A");
 
     const phoneNumber = siteConfig?.phone;
 
