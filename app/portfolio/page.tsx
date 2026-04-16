@@ -37,7 +37,7 @@ export default function Portfolio() {
       {/* 🔥 HERO */}
       <div
         style={{
-          height: "50vh",
+          height: "55vh",
           backgroundImage: "url('/images/p7.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -48,7 +48,8 @@ export default function Portfolio() {
           style={{
             position: "absolute",
             inset: 0,
-            background: "rgba(0,0,0,0.6)",
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9))",
           }}
         />
 
@@ -64,29 +65,32 @@ export default function Portfolio() {
             textAlign: "center",
           }}
         >
-          <Title style={{ color: "#D4AF37" }}>
-            Our Wedding Stories
+          <Title style={{ color: "#D4AF37", fontSize: "42px" }}>
+            Stories We’ve Captured
           </Title>
+
           <p style={{ color: "#ccc" }}>
-            A journey through love, traditions & celebrations
+            A collection of moments, emotions & timeless memories
           </p>
         </div>
       </div>
 
-      {/* 🔥 MAIN CONTENT */}
-      <div style={{ padding: "80px 40px" }}>
+      {/* 🔥 MAIN */}
+      <div style={{ padding: "100px 40px" }}>
         
         {/* FILTERS */}
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <div style={{ textAlign: "center", marginBottom: "50px" }}>
           {categories.map((cat) => (
             <Button
               key={cat}
               onClick={() => setActive(cat)}
               style={{
-                margin: "5px",
+                margin: "6px",
+                padding: "6px 18px",
+                borderRadius: "20px",
                 background: active === cat ? "#D4AF37" : "transparent",
-                color: active === cat ? "#000" : "#ccc",
-                border: "1px solid #555",
+                color: active === cat ? "#000" : "#aaa",
+                border: "1px solid rgba(255,255,255,0.2)",
               }}
             >
               {cat}
@@ -99,11 +103,13 @@ export default function Portfolio() {
           {filtered.map((img, i) => (
             <Col xs={24} sm={12} md={8} key={i}>
               <motion.div
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
                 style={{
                   overflow: "hidden",
-                  borderRadius: "10px",
+                  borderRadius: "12px",
                   cursor: "pointer",
+                  position: "relative",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
                 }}
                 onClick={() => setSelected(i)}
               >
@@ -111,10 +117,37 @@ export default function Portfolio() {
                   src={img.src}
                   style={{
                     width: "100%",
-                    height: i % 3 === 0 ? "400px" : "300px",
+                    height: i % 3 === 0 ? "420px" : "300px",
                     objectFit: "cover",
+                    transition: "0.4s",
                   }}
                 />
+
+                {/* 🔥 HOVER OVERLAY */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "rgba(0,0,0,0.4)",
+                    opacity: 0,
+                    transition: "0.3s",
+                  }}
+                  className="hover-overlay"
+                />
+
+                {/* CATEGORY */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "15px",
+                    left: "15px",
+                    color: "#fff",
+                    fontSize: "14px",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  {img.category}
+                </div>
               </motion.div>
             </Col>
           ))}
@@ -124,16 +157,16 @@ export default function Portfolio() {
         <div
           style={{
             textAlign: "center",
-            margin: "100px 0",
+            margin: "120px 0",
           }}
         >
           <Title style={{ color: "#D4AF37" }}>
-            "Every wedding is a story waiting to be told."
+            "Every frame preserves a moment that words cannot express."
           </Title>
         </div>
       </div>
 
-      {/* 🔥 LIGHTBOX */}
+      {/* 🔥 LIGHTBOX (unchanged but smoother) */}
       <AnimatePresence>
         {selected !== null && (
           <motion.div
@@ -143,7 +176,7 @@ export default function Portfolio() {
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(0,0,0,0.9)",
+              background: "rgba(0,0,0,0.95)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -181,7 +214,7 @@ export default function Portfolio() {
             <motion.img
               key={filtered[selected].src}
               src={filtered[selected].src}
-              initial={{ scale: 0.8 }}
+              initial={{ scale: 0.85 }}
               animate={{ scale: 1 }}
               style={{
                 maxWidth: "90%",

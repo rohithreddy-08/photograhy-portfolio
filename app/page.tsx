@@ -1,5 +1,6 @@
 "use client";
 
+import Testimonials from "@/components/Testimonials";
 import { Typography, Button, Row, Col } from "antd";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
@@ -12,7 +13,7 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-// 🔥 Parallax Component
+// 🔥 Parallax
 function ParallaxSection() {
   const ref = useRef(null);
 
@@ -32,7 +33,6 @@ function ParallaxSection() {
         overflow: "hidden",
       }}
     >
-      {/* Background */}
       <motion.div
         style={{
           position: "absolute",
@@ -44,7 +44,6 @@ function ParallaxSection() {
         }}
       />
 
-      {/* Overlay */}
       <div
         style={{
           position: "absolute",
@@ -53,7 +52,6 @@ function ParallaxSection() {
         }}
       />
 
-      {/* Content */}
       <div
         style={{
           position: "relative",
@@ -79,7 +77,7 @@ export default function Home() {
       {/* 🔥 HERO */}
       <div
         style={{
-          height: "90vh",
+          height: "100vh",
           backgroundImage: "url('/images/p3.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -91,7 +89,7 @@ export default function Home() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9))",
+              "linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9))",
           }}
         />
 
@@ -110,34 +108,46 @@ export default function Home() {
             textAlign: "center",
           }}
         >
-          <Title style={{ color: "#D4AF37", fontSize: "48px" }}>
-            Timeless Wedding Stories
+          <Title style={{ color: "#D4AF37", fontSize: "52px" }}>
+            Timeless Stories. Cinematic Frames.
           </Title>
 
-          <Paragraph style={{ color: "#ddd" }}>
+          <Paragraph style={{ color: "#ddd", fontSize: "16px" }}>
             Capturing emotions, traditions & unforgettable moments
           </Paragraph>
 
-          <Button
-            type="primary"
-            size="large"
-            href="/portfolio"
-            style={{
-              background: "#D4AF37",
-              border: "none",
-              color: "#000",
-              marginTop: "20px",
-            }}
-          >
-            Explore Portfolio
-          </Button>
+          <div style={{ marginTop: "25px", display: "flex", gap: "15px" }}>
+            <Button
+              size="large"
+              href="/portfolio"
+              style={{
+                background: "#D4AF37",
+                border: "none",
+                color: "#000",
+              }}
+            >
+              View Portfolio
+            </Button>
+
+            <Button
+              size="large"
+              href="/contact"
+              style={{
+                border: "1px solid #D4AF37",
+                color: "#D4AF37",
+                background: "transparent",
+              }}
+            >
+              Book Now
+            </Button>
+          </div>
         </motion.div>
       </div>
 
       {/* 🔥 FEATURED */}
       <div
         style={{
-          padding: "80px 40px",
+          padding: "100px 40px",
           background:
             "linear-gradient(135deg, #0a0a0a, #141414, #000000)",
         }}
@@ -146,7 +156,7 @@ export default function Home() {
           style={{
             textAlign: "center",
             color: "#D4AF37",
-            marginBottom: "50px",
+            marginBottom: "60px",
           }}
         >
           Featured Moments
@@ -167,7 +177,7 @@ export default function Home() {
                     src={`/images/${img}`}
                     style={{
                       width: "100%",
-                      height: "300px",
+                      height: "320px",
                       objectFit: "cover",
                       transition: "0.4s",
                     }}
@@ -188,12 +198,58 @@ export default function Home() {
       {/* 🔥 PARALLAX */}
       <ParallaxSection />
 
+      {/* 🔥 TESTIMONIALS */}
+      <div
+        style={{
+          padding: "100px 40px",
+          background: "#000",
+          textAlign: "center",
+        }}
+      >
+        <Title style={{ color: "#D4AF37", marginBottom: "50px" }}>
+          What Clients Say
+        </Title>
+
+        <Row gutter={[20, 20]}>
+          {[
+            {
+              text: "Captured every emotion beautifully. We relive our day every time we see the photos.",
+              name: "Rohith & Mounika",
+            },
+            {
+              text: "Professional, creative and cinematic. Highly recommended.",
+              name: "Arjun & Priya",
+            },
+            {
+              text: "Every frame tells a story. Truly amazing work.",
+              name: "Kiran & Anjali",
+            },
+          ].map((t, i) => (
+            <Col xs={24} md={8} key={i}>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                style={{
+                  background: "#111",
+                  padding: "20px",
+                  borderRadius: "10px",
+                }}
+              >
+                <p style={{ color: "#ccc" }}>"{t.text}"</p>
+                <h4 style={{ color: "#D4AF37", marginTop: "10px" }}>
+                  — {t.name}
+                </h4>
+              </motion.div>
+            </Col>
+          ))}
+        </Row>
+      </div>
       {/* 🔥 QUOTE */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true }}
         style={{
           padding: "100px 40px",
           textAlign: "center",
@@ -210,20 +266,18 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true }}
         style={{
-          padding: "80px 40px",
+          padding: "100px 40px",
           textAlign: "center",
           background:
             "linear-gradient(135deg, #000000, #1a1a1a)",
         }}
       >
         <Title style={{ color: "#fff" }}>
-          Let’s Capture Your Story
+          Let’s Create Something Timeless
         </Title>
 
         <Button
-          type="primary"
           size="large"
           href="/contact"
           style={{
@@ -233,7 +287,7 @@ export default function Home() {
             marginTop: "20px",
           }}
         >
-          Book Now
+          Book Your Shoot
         </Button>
       </motion.div>
     </>
