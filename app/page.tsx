@@ -1,65 +1,241 @@
-import Image from "next/image";
+"use client";
+
+import { Typography, Button, Row, Col } from "antd";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
+const { Title, Paragraph } = Typography;
+
+// 🔥 Animation
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+// 🔥 Parallax Component
+function ParallaxSection() {
+  const ref = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-50px", "50px"]);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        height: "60vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('/images/p5.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          y,
+        }}
+      />
+
+      {/* Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.6)",
+        }}
+      />
+
+      {/* Content */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <Title style={{ color: "#D4AF37" }}>
+          Every Frame Tells a Story
+        </Title>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* 🔥 HERO */}
+      <div
+        style={{
+          height: "90vh",
+          backgroundImage: "url('/images/p3.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9))",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={fadeUp}
+          style={{
+            position: "relative",
+            zIndex: 2,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <Title style={{ color: "#D4AF37", fontSize: "48px" }}>
+            Timeless Wedding Stories
+          </Title>
+
+          <Paragraph style={{ color: "#ddd" }}>
+            Capturing emotions, traditions & unforgettable moments
+          </Paragraph>
+
+          <Button
+            type="primary"
+            size="large"
+            href="/portfolio"
+            style={{
+              background: "#D4AF37",
+              border: "none",
+              color: "#000",
+              marginTop: "20px",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            Explore Portfolio
+          </Button>
+        </motion.div>
+      </div>
+
+      {/* 🔥 FEATURED */}
+      <div
+        style={{
+          padding: "80px 40px",
+          background:
+            "linear-gradient(135deg, #0a0a0a, #141414, #000000)",
+        }}
+      >
+        <Title
+          style={{
+            textAlign: "center",
+            color: "#D4AF37",
+            marginBottom: "50px",
+          }}
+        >
+          Featured Moments
+        </Title>
+
+        <Row gutter={[20, 20]}>
+          {["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg"].map(
+            (img, i) => (
+              <Col xs={24} sm={12} md={8} key={i}>
+                <motion.div
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  style={{ overflow: "hidden", borderRadius: "10px" }}
+                >
+                  <img
+                    src={`/images/${img}`}
+                    style={{
+                      width: "100%",
+                      height: "300px",
+                      objectFit: "cover",
+                      transition: "0.4s",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.transform = "scale(1.08)")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.transform = "scale(1)")
+                    }
+                  />
+                </motion.div>
+              </Col>
+            )
+          )}
+        </Row>
+      </div>
+
+      {/* 🔥 PARALLAX */}
+      <ParallaxSection />
+
+      {/* 🔥 QUOTE */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        style={{
+          padding: "100px 40px",
+          textAlign: "center",
+          background: "#111",
+        }}
+      >
+        <Title style={{ color: "#D4AF37" }}>
+          "Moments fade, but memories captured last forever."
+        </Title>
+      </motion.div>
+
+      {/* 🔥 CTA */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        style={{
+          padding: "80px 40px",
+          textAlign: "center",
+          background:
+            "linear-gradient(135deg, #000000, #1a1a1a)",
+        }}
+      >
+        <Title style={{ color: "#fff" }}>
+          Let’s Capture Your Story
+        </Title>
+
+        <Button
+          type="primary"
+          size="large"
+          href="/contact"
+          style={{
+            background: "#D4AF37",
+            border: "none",
+            color: "#000",
+            marginTop: "20px",
+          }}
+        >
+          Book Now
+        </Button>
+      </motion.div>
+    </>
   );
 }
